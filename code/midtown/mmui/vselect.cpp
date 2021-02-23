@@ -19,6 +19,43 @@
 define_dummy_symbol(mmui_vselect);
 
 #include "vselect.h"
+#include "data7/str.h"
+#include "mmcityinfo/vehlist.h"
+#include "mmaudio/sound.h"
+
+constexpr auto MAX_BASE_NAME_SIZE = 40;
+static char carBaseName[MAX_BASE_NAME_SIZE];
+
+char* VehicleSelectBase::GetCarTitle(i32 carIndex, char* descriptionOut, i16 playSound, string* colorsOut)
+{
+    mmVehInfo* vehicleInfo = VehicleListPtr->GetVehicleInfo(carIndex);
+
+    sprintf_s(carBaseName, MAX_BASE_NAME_SIZE, "%s", vehicleInfo->BaseName);
+
+    if (descriptionOut) 
+    {
+        sprintf(descriptionOut, "%s", vehicleInfo->Description);
+    }
+
+    if (colorsOut)
+    {
+        *colorsOut = vehicleInfo->Colors;
+    }
+
+    if (playSound && Sound)
+    {
+        Sound->CarIndex = carIndex;
+
+        if (!Sound->IsPlaying(0))
+        {
+            Sound->PlayOnce(-1.0f, -1.0f);
+        }
+    }
+
+    return carBaseName;
+}
 
 void VehicleSelectBase::Reset()
-{}
+{
+    return;
+}

@@ -288,7 +288,14 @@ private:
     // 0x61FDAC | ?s_DWSoftFreqChange2DCtrlFlags@AudSound@@0KB
     ARTS_IMPORT static u32 const s_DWSoftFreqChange2DCtrlFlags;
 
-    u8 gap20[0x98];
+private:
+    u8 gap20[0x28];
+
+public:
+    i32 CarIndex {0}; // 0x48 - TODO : Name probably isn't right
+
+private:
+    u8 gap4C[0x6C];
 };
 
 check_size(AudSound, 0xB8);

@@ -59,6 +59,8 @@
 
 #include "mmwidget/menu.h"
 
+class AudSound;
+
 class VehicleSelectBase : public UIMenu
 {
     // const VehicleSelectBase::`vftable' @ 0x61D3D0
@@ -97,7 +99,7 @@ public:
     ARTS_IMPORT void FillStats();
 
     // 0x49BAA0 | ?GetCarTitle@VehicleSelectBase@@QAEPADHPADFPAVstring@@@Z
-    ARTS_IMPORT char* GetCarTitle(i32 arg1, char* arg2, i16 arg3, class string* arg4);
+    ARTS_EXPORT char* GetCarTitle(i32 carIndex, char* descriptionOut, i16 playSound, string* colorsOut);
 
     // 0x49C510 | ?IncCar@VehicleSelectBase@@QAEXXZ | inline
     ARTS_IMPORT void IncCar();
@@ -138,7 +140,9 @@ public:
     // 0x49BA00 | ?Update@VehicleSelectBase@@UAEXXZ
     ARTS_IMPORT void Update() override;
 
-    u8 gap90[0xD8];
+    u8 gap90[0xD0];
+    AudSound* Sound {nullptr}; // 0x160
+    u8 gap164[0x4];
 };
 
 check_size(VehicleSelectBase, 0x168);

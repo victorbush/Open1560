@@ -778,7 +778,7 @@ include_dummy_symbol(mmui_pu_menu);
 // include_dummy_symbol(mmui_racebase);
 // include_dummy_symbol(mmui_racehost);
 // include_dummy_symbol(mmui_vehicle);
-// include_dummy_symbol(mmui_vselect);
+include_dummy_symbol(mmui_vselect);
 // include_dummy_symbol(mmui_vshow);
 
 // include_dummy_symbol(mmwidget_bm_button);

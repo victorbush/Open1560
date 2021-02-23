@@ -78,8 +78,8 @@ arts_component "mmui"
         -- "racehost.h",
         -- "vehicle.cpp",
         -- "vehicle.h",
-        -- "vselect.cpp",
-        -- "vselect.h",
+        "vselect.cpp",
+        "vselect.h",
         -- "vshow.cpp",
         -- "vshow.h",
     }

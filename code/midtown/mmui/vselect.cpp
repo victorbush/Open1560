@@ -26,6 +26,39 @@ define_dummy_symbol(mmui_vselect);
 constexpr auto MAX_BASE_NAME_SIZE = 40;
 static char carBaseName[MAX_BASE_NAME_SIZE];
 
+VehicleSelectBase::VehicleSelectBase(i32 menu_id)
+    : UIMenu(menu_id)
+    , gapAC()
+    , gapB4()
+{
+    Sound = new AudSound(AudSound::GetSoft2DFlags(), VehicleListPtr->NumVehicles, -1);
+
+    for (int i = 0; i < VehicleListPtr->NumVehicles; ++i)
+    {
+        mmVehInfo* vehicleInfo = VehicleListPtr->GetVehicleInfo(i);
+        if (!vehicleInfo || !vehicleInfo->Valid)
+        {
+            continue;
+        }
+        
+        char name[0x50];
+        sprintf_s(name, sizeof(name), "%s_select", vehicleInfo->BaseName);
+        Sound->Load(name, i);
+        Sound->SetVolume(0.91000003f, -1);
+    }
+
+    // TODO - not sure what this array is of
+    gap12C = new int[VehicleListPtr->NumVehicles << 4];
+
+    for (int i = 0; i < 4; ++i)
+    {
+        gap140[i] = 0x49742400;
+        gap150[i] = 0;
+    }
+
+    gapA4 = -1;
+}
+
 char* VehicleSelectBase::GetCarTitle(i32 carIndex, char* descriptionOut, i16 playSound, string* colorsOut)
 {
     mmVehInfo* vehicleInfo = VehicleListPtr->GetVehicleInfo(carIndex);

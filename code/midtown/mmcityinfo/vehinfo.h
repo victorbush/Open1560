@@ -56,22 +56,22 @@ public:
     // 0x4D3C00 | ?Print@mmVehInfo@@QAEXXZ
     ARTS_IMPORT void Print();
 
-    char BaseName[40] {};
-    char Description[40] {};
-    char field_54[40] {};
-    char Colors[80] {};
+    char BaseName[40] {};       // 0x4
+    char Description[40] {};    // 0x2C
+    char field_54[40] {};       // 0x54
+    char Colors[80] {};         // 0x7C
 
-    i32 Flags {0};
-    i32 Order {0};
-    b32 Valid {false};
-    i32 UnlockScore {0};
-    i32 UnlockFlags {0};
-    b32 IsLocked {false};
-    i32 Horsepower {0};
-    i32 TopSpeed {0};
-    i32 Durability {0};
-    i32 Mass {0};
-    f32 ScoringBias {0.0f};
+    i32 Flags {0};              // 0xCC
+    i32 Order {0};              // 0xD0
+    b32 Valid {false};          // 0xD4
+    i32 UnlockScore {0};        // 0xD8
+    i32 UnlockFlags {0};        // 0xDC
+    b32 IsLocked {false};       // 0xE0
+    i32 Horsepower {0};         // 0xE4
+    i32 TopSpeed {0};           // 0xE8
+    i32 Durability {0};         // 0xEC
+    i32 Mass {0};               // 0xF0
+    f32 ScoringBias {0.0f};     // 0xF4
 };
 
 check_size(mmVehInfo, 0xF8);

@@ -58,6 +58,7 @@
 */
 
 #include "mmwidget/menu.h"
+#include "data7/str.h"
 
 class AudSound;
 
@@ -67,7 +68,7 @@ class VehicleSelectBase : public UIMenu
 
 public:
     // 0x49A790 | ??0VehicleSelectBase@@QAE@H@Z
-    ARTS_IMPORT VehicleSelectBase(i32 arg1);
+    ARTS_EXPORT VehicleSelectBase(i32 menu_id);
 
     // 0x49C3A0 | ??_EVehicleSelectBase@@UAEPAXI@Z
     // 0x49C3A0 | ??_GVehicleSelectBase@@UAEPAXI@Z
@@ -140,9 +141,18 @@ public:
     // 0x49BA00 | ?Update@VehicleSelectBase@@UAEXXZ
     ARTS_IMPORT void Update() override;
 
-    u8 gap90[0xD0];
-    AudSound* Sound {nullptr}; // 0x160
-    u8 gap164[0x4];
+    u8 gap90[0x14];                 // 0x90
+    i32 gapA4;                      // 0xA4
+    u8 gapA8;                       // 0xA8
+    string gapAC;                   // 0xAC
+    string gapB4;                   // 0xB4
+    u8 gapBC[0x70];                 // 0xBC
+    void* gap12C {nullptr};         // 0x12C
+    u8 gap130[0x10];                // 0x130
+    int gap140[4];                  // 0x140
+    int gap150[4];                  // 0x150
+    AudSound* Sound {nullptr};      // 0x160
+    u8 gap164[0x4];                 // 0x164
 };
 
 check_size(VehicleSelectBase, 0x168);

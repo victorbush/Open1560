@@ -97,7 +97,7 @@ class AudSound final : public asNode
 
 public:
     // 0x4EA250 | ??0AudSound@@QAE@KHF@Z
-    ARTS_IMPORT AudSound(u32 arg1, i32 arg2, i16 arg3);
+    ARTS_IMPORT AudSound(ulong arg1, i32 arg2, i16 arg3);
 
     // 0x4EBC80 | ??_GAudSound@@UAEPAXI@Z
     // 0x4EBC80 | ??_EAudSound@@UAEPAXI@Z
@@ -264,7 +264,7 @@ public:
     ARTS_IMPORT static u32 const GetFreqChange3DFlags();
 
     // 0x4EBB10 | ?GetSoft2DFlags@AudSound@@SA?BKXZ
-    ARTS_IMPORT static u32 const GetSoft2DFlags();
+    ARTS_IMPORT static ulong const GetSoft2DFlags();
 
     // 0x4EBB50 | ?GetSoftFreqChange2DFlags@AudSound@@SA?BKXZ | unused
     ARTS_IMPORT static u32 const GetSoftFreqChange2DFlags();

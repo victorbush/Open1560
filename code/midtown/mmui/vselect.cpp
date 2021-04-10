@@ -20,8 +20,10 @@ define_dummy_symbol(mmui_vselect);
 
 #include "vselect.h"
 #include "data7/str.h"
-#include "mmcityinfo/vehlist.h"
 #include "mmaudio/sound.h"
+#include "mmcityinfo/state.h"
+#include "mmcityinfo/vehlist.h"
+#include "mmeffects/vehform.h"
 
 constexpr auto MAX_BASE_NAME_SIZE = 40;
 static char carBaseName[MAX_BASE_NAME_SIZE];
@@ -47,9 +49,8 @@ VehicleSelectBase::VehicleSelectBase(i32 menu_id)
         Sound->SetVolume(0.91000003f, -1);
     }
 
-    // TODO - not sure what this array is of
-    gap12C = new int[VehicleListPtr->NumVehicles << 4];
-
+    VehicleForms = new mmVehicleForm[VehicleListPtr->NumVehicles];
+    
     for (int i = 0; i < 4; ++i)
     {
         gap140[i] = 0x49742400;
@@ -57,6 +58,31 @@ VehicleSelectBase::VehicleSelectBase(i32 menu_id)
     }
 
     gapA4 = -1;
+}
+
+//void VehicleSelectBase::AllSetCar(char* carBaseName, i32 arg2)
+//{
+//    i32 carId = VehicleListPtr->GetVehicleID(carBaseName);
+//    if (carId != SelectedCarId)
+//    {
+//        SelectedCarId = carId;
+//        SetPick(carId, 0);
+//        FillStats();
+//    }
+//
+//    MMSTATE
+//}
+
+void VehicleSelectBase::CarMod(i32& arg1)
+{
+    if (arg1 < 0) 
+    {
+        arg1 = VehicleListPtr->NumVehicles + arg1;
+    }
+    else
+    {
+        arg1 = arg1 % VehicleListPtr->NumVehicles;
+    }
 }
 
 char* VehicleSelectBase::GetCarTitle(i32 carIndex, char* descriptionOut, i16 playSound, string* colorsOut)
@@ -67,6 +93,7 @@ char* VehicleSelectBase::GetCarTitle(i32 carIndex, char* descriptionOut, i16 pla
 
     if (descriptionOut) 
     {
+        // TODO : Use sprintf_s
         sprintf(descriptionOut, "%s", vehicleInfo->Description);
     }
 
@@ -91,4 +118,9 @@ char* VehicleSelectBase::GetCarTitle(i32 carIndex, char* descriptionOut, i16 pla
 void VehicleSelectBase::Reset()
 {
     return;
+}
+
+void VehicleSelectBase::TDPickCB()
+{
+    SetPick(SelectedCarId, 1);
 }

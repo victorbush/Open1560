@@ -61,6 +61,7 @@
 #include "data7/str.h"
 
 class AudSound;
+class mmVehicleForm;
 
 class VehicleSelectBase : public UIMenu
 {
@@ -73,16 +74,16 @@ public:
     // 0x49C3A0 | ??_EVehicleSelectBase@@UAEPAXI@Z
     // 0x49C3A0 | ??_GVehicleSelectBase@@UAEPAXI@Z
     // 0x49B7D0 | ??1VehicleSelectBase@@UAE@XZ
-    ARTS_IMPORT ~VehicleSelectBase() override;
+    ARTS_IMPORT virtual ~VehicleSelectBase() override;
 
     // 0x49B990 | ?AllSetCar@VehicleSelectBase@@QAEXPADH@Z
-    ARTS_IMPORT void AllSetCar(char* arg1, i32 arg2);
+    ARTS_IMPORT void AllSetCar(char* carBaseName, i32 arg2);
 
     // 0x49C000 | ?AssignVehicleStats@VehicleSelectBase@@QAEXHMMMM@Z
     ARTS_IMPORT void AssignVehicleStats(i32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 
     // 0x49BC50 | ?CarMod@VehicleSelectBase@@QAEXAAH@Z
-    ARTS_IMPORT void CarMod(i32& arg1);
+    ARTS_EXPORT void CarMod(i32& arg1);
 
     // 0x49AA70 | ?ColorCB@VehicleSelectBase@@QAEXXZ
     ARTS_IMPORT void ColorCB();
@@ -115,13 +116,13 @@ public:
     ARTS_IMPORT i32 LoadStats(char* arg1);
 
     // 0x49B960 | ?PostSetup@VehicleSelectBase@@UAEXXZ
-    ARTS_IMPORT void PostSetup() override;
+    ARTS_IMPORT virtual void PostSetup() override;
 
     // 0x49B870 | ?PreSetup@VehicleSelectBase@@UAEXXZ
-    ARTS_IMPORT void PreSetup() override;
+    ARTS_IMPORT virtual void PreSetup() override;
 
     // 0x49B9F0 | ?Reset@VehicleSelectBase@@UAEXXZ
-    ARTS_EXPORT void Reset() override;
+    ARTS_EXPORT virtual void Reset() override;
 
     // 0x49BBF0 | ?SetLastUnlockedVehicle@VehicleSelectBase@@QAEXXZ
     ARTS_IMPORT void SetLastUnlockedVehicle();
@@ -130,29 +131,31 @@ public:
     ARTS_IMPORT void SetLockedLabel();
 
     // 0x49BC80 | ?SetPick@VehicleSelectBase@@QAEXHF@Z
-    ARTS_IMPORT void SetPick(i32 arg1, i16 arg2);
+    ARTS_IMPORT void SetPick(i32 carId, i16 arg2);
 
     // 0x49C520 | ?SetShowcaseFlag@VehicleSelectBase@@QAEXXZ | inline
     ARTS_IMPORT void SetShowcaseFlag();
 
     // 0x49B9E0 | ?TDPickCB@VehicleSelectBase@@QAEXXZ
-    ARTS_IMPORT void TDPickCB();
+    ARTS_EXPORT void TDPickCB();
 
     // 0x49BA00 | ?Update@VehicleSelectBase@@UAEXXZ
-    ARTS_IMPORT void Update() override;
+    ARTS_IMPORT virtual void Update() override;
 
-    u8 gap90[0x14];                 // 0x90
-    i32 gapA4;                      // 0xA4
-    u8 gapA8;                       // 0xA8
-    string gapAC;                   // 0xAC
-    string gapB4;                   // 0xB4
-    u8 gapBC[0x70];                 // 0xBC
-    void* gap12C {nullptr};         // 0x12C
-    u8 gap130[0x10];                // 0x130
-    int gap140[4];                  // 0x140
-    int gap150[4];                  // 0x150
-    AudSound* Sound {nullptr};      // 0x160
-    u8 gap164[0x4];                 // 0x164
+    u8 gap90[0xC];                          // 0x90
+    i32 SelectedCarId {0};                  // 0x9C
+    i32 gapA0;                              // 0xA0
+    i32 gapA4;                              // 0xA4
+    u8 gapA8;                               // 0xA8
+    string gapAC;                           // 0xAC
+    string gapB4;                           // 0xB4
+    u8 gapBC[0x70];                         // 0xBC
+    mmVehicleForm* VehicleForms {nullptr};  // 0x12C
+    u8 gap130[0x10];                        // 0x130
+    int gap140[4];                          // 0x140
+    int gap150[4];                          // 0x150
+    AudSound* Sound {nullptr};              // 0x160
+    u8 gap164[0x4];                         // 0x164
 };
 
 check_size(VehicleSelectBase, 0x168);
